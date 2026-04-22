@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สมชาย จัดสวน · Pattaya Garden Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nav" id="navbar">
+    <div class="nav__logo">
+      <span class="nav__logo-icon">🌿</span>
+      <span>สมชาย<em>จัดสวน</em></span>
+    </div>
+    <nav class="nav__links">
+      <a href="#portfolio">ผลงาน</a>
+      <a href="#services">บริการ</a>
+      <a href="#reviews">รีวิว</a>
+      <a href="#contact">ติดต่อ</a>
+    </nav>
+    <a href="#contact" class="nav__cta">นัดประเมินฟรี</a>
+    <button class="nav__burger" id="burgerBtn" aria-label="เมนู">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#portfolio" class="mob-link">ผลงาน</a>
+    <a href="#services" class="mob-link">บริการ</a>
+    <a href="#reviews" class="mob-link">รีวิว</a>
+    <a href="#contact" class="mob-link">ติดต่อ</a>
+    <a href="#contact" class="mob-cta">นัดประเมินฟรี</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero__bg-text">GARDEN</div>
+    <div class="hero__content">
+      <p class="hero__sub reveal">ช่างจัดสวนมืออาชีพ · พัทยา</p>
+      <h1 class="hero__title reveal">ออกแบบสวน<br /><span class="hero__title--accent">ที่ใช่สำหรับคุณ</span></h1>
+      <p class="hero__desc reveal">ประสบการณ์กว่า 15 ปี รับออกแบบ ดูแลรักษา และตกแต่งสวนบ้าน<br />คอนโด โรงแรม และรีสอร์ท ทั่วพื้นที่พัทยาและชลบุรี</p>
+      <div class="hero__actions reveal">
+        <a href="#portfolio" class="btn btn--primary">ดูผลงาน</a>
+        <a href="#contact" class="btn btn--outline">ขอใบเสนอราคา</a>
+      </div>
+    </div>
+    <div class="hero__visual reveal">
+      <div class="hero__card hero__card--1">
+        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&q=80" alt="ผลงานสวน" />
+      </div>
+      <div class="hero__card hero__card--2">
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=80" alt="ผลงานสวน 2" />
+      </div>
+      <div class="hero__badge">
+        <span class="hero__badge-num">4.9</span>
+        <span class="hero__badge-stars">★★★★★</span>
+        <span class="hero__badge-label">Google Reviews</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stats__item reveal"><span class="stats__num" data-target="200">0</span><span class="stats__num">+</span><span class="stats__label">งานสำเร็จ</span></div>
+    <div class="stats__divider"></div>
+    <div class="stats__item reveal"><span class="stats__num" data-target="15">0</span><span class="stats__label">ปีประสบการณ์</span></div>
+    <div class="stats__divider"></div>
+    <div class="stats__item reveal"><span class="stats__num" data-target="50">0</span><span class="stats__num">+</span><span class="stats__label">ลูกค้าประจำ</span></div>
+    <div class="stats__divider"></div>
+    <div class="stats__item reveal"><span class="stats__num">4.9</span><span class="stats__label">คะแนนเฉลี่ย</span></div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">สิ่งที่เราทำ</p>
+        <h2 class="section-title">บริการของเรา</h2>
+      </div>
+      <div class="services__grid">
+        <div class="service-card reveal">
+          <div class="service-card__icon">🏡</div>
+          <h3>ออกแบบสวนใหม่</h3>
+          <p>วางแผนและออกแบบสวนตั้งแต่ศูนย์ ให้เข้ากับบ้านและสไตล์ที่คุณชอบ</p>
+          <ul><li>สวนบ้านพักอาศัย</li><li>สวนโรงแรม / รีสอร์ท</li><li>สวนคอนโดมิเนียม</li></ul>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-card__icon">✂️</div>
+          <h3>ดูแลรักษาสวน</h3>
+          <p>บริการดูแลรักษาสวนประจำรายเดือน ตัดแต่งกิ่ง รดน้ำ ใส่ปุ๋ย</p>
+          <ul><li>ตัดแต่งกิ่งและใบ</li><li>ระบบรดน้ำอัตโนมัติ</li><li>กำจัดวัชพืชและศัตรูพืช</li></ul>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-card__icon">🌺</div>
+          <h3>ตกแต่งภูมิทัศน์</h3>
+          <p>เพิ่มความสวยงามด้วยไม้ประดับ หิน น้ำตก และองค์ประกอบพิเศษ</p>
+          <ul><li>น้ำตกและบ่อปลา</li><li>ทางเดินหินธรรมชาติ</li><li>ไม้ประดับและดอกไม้</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">งานของเรา</p>
+        <h2 class="section-title">ผลงานล่าสุด</h2>
+      </div>
+      <div class="portfolio__filter reveal">
+        <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+        <button class="filter-btn" data-filter="design">ออกแบบ</button>
+        <button class="filter-btn" data-filter="maintain">ดูแลรักษา</button>
+        <button class="filter-btn" data-filter="decor">ตกแต่ง</button>
+      </div>
+      <div class="portfolio__grid" id="portfolioGrid">
+        <div class="portfolio-item" data-category="design">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="สวนบ้านพักตากอากาศ" />
+          <div class="portfolio-item__overlay"><span class="portfolio-item__tag">ออกแบบ</span><h4>สวนบ้านพักตากอากาศ</h4><p>จอมเทียน, พัทยา</p></div>
+        </div>
+        <div class="portfolio-item" data-category="maintain">
+          <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=500&q=80" alt="รีสอร์ท พูลวิลล่า" />
+          <div class="portfolio-item__overlay"><span class="portfolio-item__tag">ดูแลรักษา</span><h4>รีสอร์ท พูลวิลล่า</h4><p>นาจอมเทียน, ชลบุรี</p></div>
+        </div>
+        <div class="portfolio-item portfolio-item--tall" data-category="decor">
+          <img src="https://images.unsplash.com/photo-1599598425947-5202edd56fdb?w=500&q=80" alt="น้ำตกสวนหิน" />
+          <div class="portfolio-item__overlay"><span class="portfolio-item__tag">ตกแต่ง</span><h4>น้ำตกสวนหินธรรมชาติ</h4><p>พัทยาเหนือ</p></div>
+        </div>
+        <div class="portfolio-item" data-category="design">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=500&q=80" alt="สวนคอนโด" />
+          <div class="portfolio-item__overlay"><span class="portfolio-item__tag">ออกแบบ</span><h4>สวนลานคอนโดมิเนียม</h4><p>พัทยากลาง</p></div>
+        </div>
+        <div class="portfolio-item" data-category="decor">
+          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=500&q=80" alt="สวนดอกไม้" />
+          <div class="portfolio-item__overlay"><span class="portfolio-item__tag">ตกแต่ง</span><h4>สวนดอกไม้ประดับ</h4><p>บางแสน, ชลบุรี</p></div>
+        </div>
+        <div class="portfolio-item" data-category="maintain">
+          <img src="https://images.unsplash.com/photo-1477519242566-6ae87c31d212?w=500&q=80" alt="สวนโรงแรม" />
+          <div class="portfolio-item__overlay"><span class="portfolio-item__tag">ดูแลรักษา</span><h4>ดูแลสวนโรงแรม 5 ดาว</h4><p>วงศ์อมาตย์, พัทยา</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="before-after">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">เห็นความแตกต่าง</p>
+        <h2 class="section-title">ก่อน &amp; หลัง</h2>
+      </div>
+      <div class="ba-wrapper reveal">
+        <div class="ba-slider" id="baSlider">
+          <div class="ba-after">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80" alt="หลัง" />
+            <span class="ba-label ba-label--after">หลัง</span>
+          </div>
+          <div class="ba-before" id="baBefore">
+            <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80" alt="ก่อน" />
+            <span class="ba-label ba-label--before">ก่อน</span>
+          </div>
+          <div class="ba-handle" id="baHandle">
+            <div class="ba-handle__line"></div>
+            <div class="ba-handle__circle">⟺</div>
+          </div>
+        </div>
+        <p class="ba-hint">← ลากเพื่อเปรียบเทียบ →</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">ลูกค้าพูดถึงเรา</p>
+        <h2 class="section-title">รีวิวจริง จากลูกค้าจริง</h2>
+      </div>
+      <div class="reviews__grid" id="reviewsGrid">
+        <!-- render by admin.js -->
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact__inner reveal">
+        <div class="contact__info">
+          <p class="section-tag">ติดต่อเรา</p>
+          <h2>พร้อมจัดสวน<br />ในฝันของคุณ?</h2>
+          <p class="contact__desc">ประเมินฟรี ไม่มีค่าใช้จ่าย ทีมงานพร้อมเข้าพบในพื้นที่พัทยาและชลบุรี</p>
+          <div class="contact__channels">
+            <a href="tel:0812345678" class="channel"><span class="channel__icon">📞</span><div><strong>โทรศัพท์</strong><span>081-234-5678</span></div></a>
+            <a href="#" class="channel"><span class="channel__icon">💬</span><div><strong>LINE ID</strong><span>@somchai.garden</span></div></a>
+            <a href="mailto:somchai.garden@gmail.com" class="channel"><span class="channel__icon">✉️</span><div><strong>อีเมล</strong><span>somchai.garden@gmail.com</span></div></a>
+          </div>
+        </div>
+        <form class="contact__form" id="contactForm">
+          <div class="form-group">
+            <label for="name">ชื่อ - นามสกุล</label>
+            <input type="text" id="name" name="name" placeholder="สมศักดิ์ ดีใจ" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">เบอร์โทรศัพท์</label>
+            <input type="tel" id="phone" name="phone" placeholder="08x-xxx-xxxx" required />
+          </div>
+          <div class="form-group">
+            <label for="service">บริการที่สนใจ</label>
+            <select id="service" name="service">
+              <option value="">-- เลือกบริการ --</option>
+              <option>ออกแบบสวนใหม่</option>
+              <option>ดูแลรักษาสวนรายเดือน</option>
+              <option>ตกแต่งภูมิทัศน์</option>
+              <option>อื่นๆ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">รายละเอียดเพิ่มเติม</label>
+            <textarea id="message" name="message" rows="4" placeholder="บอกเราเกี่ยวกับงานของคุณ..."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">ส่งข้อความ →</button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="nav__logo" style="color:#fff"><span class="nav__logo-icon">🌿</span><span>สมชาย<em>จัดสวน</em></span></div>
+          <p>ช่างจัดสวนมืออาชีพ พัทยา<br />รับงานทั่วจังหวัดชลบุรี</p>
+        </div>
+        <div class="footer__links">
+          <h4>เมนู</h4>
+          <a href="#portfolio">ผลงาน</a>
+          <a href="#services">บริการ</a>
+          <a href="#reviews">รีวิว</a>
+          <a href="#contact">ติดต่อ</a>
+        </div>
+        <div class="footer__social">
+          <h4>ติดตามเรา</h4>
+          <a href="#">Facebook</a>
+          <a href="#">LINE Official</a>
+          <a href="#">Google Maps</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2025 สมชาย จัดสวน · Somchai Garden Studio · All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ===== ADMIN TOGGLE BUTTON ===== -->
+  <button class="admin-toggle" onclick="toggleAdmin()" title="Admin Panel">⚙️</button>
+
+  <!-- ===== ADMIN SIDE PANEL ===== -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-panel__head">
+      <h3>⚙️ จัดการเนื้อหา</h3>
+      <div style="display:flex;gap:8px;align-items:center"><button class="admin-logout" onclick="adminLogout()" title="ออกจากระบบ">🚪</button><button class="admin-close" onclick="toggleAdmin()">✕</button></div>
+    </div>
+    <div class="admin-panel__body">
+
+      <!-- Portfolio section -->
+      <div class="admin-section">
+        <div class="admin-section__head">
+          <h4>📸 ผลงาน</h4>
+          <button class="admin-add-btn" onclick="openAddPortfolio()">+ เพิ่ม</button>
+        </div>
+        <div class="port-admin-list" id="portAdminList"></div>
+      </div>
+
+      <!-- Before / After section -->
+      <div class="admin-section">
+        <div class="admin-section__head">
+          <h4>🔄 Before / After</h4>
+          <button class="admin-add-btn" onclick="openAddBA()">+ เพิ่ม</button>
+        </div>
+        <div class="ba-admin-list" id="baAdminList"></div>
+      </div>
+
+      <!-- Reviews section -->
+      <div class="admin-section">
+        <div class="admin-section__head">
+          <h4>⭐ รีวิวลูกค้า</h4>
+          <button class="admin-add-btn" onclick="openAddReview()">+ เพิ่ม</button>
+        </div>
+        <div class="port-admin-list" id="reviewAdminList"></div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ===== LOGIN MODAL ===== -->
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-box" style="max-width:360px">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 12px">🔐</div>
+        <h3 style="margin:0">Admin Login</h3>
+        <p style="font-size:13px;color:var(--text-light);margin-top:6px">เฉพาะเจ้าของเว็บเท่านั้น</p>
+      </div>
+      <div class="modal-form">
+        <label>รหัสผ่าน
+          <input type="password" id="adminPwInput" placeholder="••••••••"
+            onkeydown="if(event.key==='Enter')adminLogin()" />
+        </label>
+        <p id="adminPwError" style="color:#c0392b;font-size:13px;min-height:18px;text-align:center"></p>
+        <div class="modal-btns">
+          <button class="btn btn--cancel" onclick="closeModal('loginModal')">ยกเลิก</button>
+          <button class="btn btn--primary" onclick="adminLogin()">เข้าสู่ระบบ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== REVIEW MODAL ===== -->
+  <div class="modal-overlay" id="reviewModal">
+    <div class="modal-box" style="max-width:480px">
+      <h3 id="reviewModalTitle">เพิ่มรีวิว</h3>
+      <div class="modal-form">
+        <input type="hidden" id="reviewId" />
+        <label>ชื่อลูกค้า<input type="text" id="reviewName" placeholder="เช่น สุดา มีชัยภูมิ" /></label>
+        <label>ที่อยู่ / ประเภทงาน<input type="text" id="reviewLocation" placeholder="เช่น บ้านพักส่วนตัว, จอมเทียน" /></label>
+        <label>ดาว
+          <div class="star-picker" id="starPicker">
+            <span class="star-opt" data-val="1">★</span>
+            <span class="star-opt" data-val="2">★</span>
+            <span class="star-opt" data-val="3">★</span>
+            <span class="star-opt" data-val="4">★</span>
+            <span class="star-opt" data-val="5">★</span>
+          </div>
+          <input type="hidden" id="reviewStars" value="5" />
+        </label>
+        <label>ข้อความรีวิว<textarea id="reviewText" rows="4" placeholder="เขียนรีวิวจากลูกค้า..."></textarea></label>
+        <label>รูปโปรไฟล์ (ไม่บังคับ)
+          <div class="upload-area upload-area--sm" id="reviewAvatarArea" onclick="document.getElementById('reviewAvatarFile').click()">
+            <input type="file" id="reviewAvatarFile" accept="image/*" style="display:none" />
+            <img id="reviewAvatarPreview" class="img-preview-upload" src="" alt="avatar" />
+            <div class="upload-placeholder" id="reviewAvatarPlaceholder"><span>👤</span><p>เลือกรูปโปรไฟล์</p></div>
+          </div>
+          <input type="hidden" id="reviewAvatar" />
+        </label>
+        <label>แสดงป้าย (ไม่บังคับ)<input type="text" id="reviewBadge" placeholder="เช่น Google Review, Line Review" /></label>
+        <div class="modal-btns">
+          <button class="btn btn--cancel" onclick="closeModal('reviewModal')">ยกเลิก</button>
+          <button class="btn btn--primary" onclick="saveReview()">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PORTFOLIO MODAL ===== -->
+  <div class="modal-overlay" id="portModal">
+    <div class="modal-box">
+      <h3 id="portModalTitle">เพิ่มผลงานใหม่</h3>
+      <div class="modal-form">
+        <input type="hidden" id="portId" />
+        <label>ชื่อผลงาน<input type="text" id="portTitle" placeholder="เช่น สวนบ้านพัก" /></label>
+        <label>สถานที่<input type="text" id="portLoc" placeholder="เช่น จอมเทียน, พัทยา" /></label>
+        <label>หมวดหมู่
+          <select id="portCat">
+            <option value="design">ออกแบบ</option>
+            <option value="maintain">ดูแลรักษา</option>
+            <option value="decor">ตกแต่ง</option>
+          </select>
+        </label>
+        <label>รูปภาพผลงาน
+          <div class="upload-area" id="portUploadArea" onclick="document.getElementById('portImgFile').click()">
+            <input type="file" id="portImgFile" accept="image/*" style="display:none" />
+            <img id="portImgPreview" class="img-preview-upload" src="" alt="preview" />
+            <div class="upload-placeholder" id="portUploadPlaceholder">
+              <span>📁</span>
+              <p>คลิกเพื่อเลือกรูป</p>
+              <small>JPG, PNG, WEBP (ไม่เกิน 5MB)</small>
+            </div>
+          </div>
+        </label>
+        <input type="hidden" id="portImg" />
+        <label class="checkbox-row">
+          <input type="checkbox" id="portTall" />
+          แสดงแบบสูง (2 แถว)
+        </label>
+        <div class="modal-btns">
+          <button class="btn btn--cancel" onclick="closeModal('portModal')">ยกเลิก</button>
+          <button class="btn btn--primary" onclick="savePortfolio()">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BEFORE/AFTER MODAL ===== -->
+  <div class="modal-overlay" id="baModal">
+    <div class="modal-box">
+      <h3 id="baModalTitle">เพิ่มชุด Before/After</h3>
+      <div class="modal-form">
+        <input type="hidden" id="baId" />
+        <label>ชื่อ<input type="text" id="baTitle" placeholder="เช่น สวนบ้านพักอาศัย" /></label>
+        <label>รูปภาพ "ก่อน"
+          <div class="upload-area upload-area--sm" id="baBeforeArea" onclick="document.getElementById('baBeforeFile').click()">
+            <input type="file" id="baBeforeFile" accept="image/*" style="display:none" />
+            <img id="baBeforePreview" class="img-preview-upload" src="" alt="before preview" />
+            <div class="upload-placeholder" id="baBeforePlaceholder"><span>📁</span><p>เลือกรูปก่อน</p></div>
+          </div>
+          <input type="hidden" id="baBefore2" />
+        </label>
+        <label>รูปภาพ "หลัง"
+          <div class="upload-area upload-area--sm" id="baAfterArea" onclick="document.getElementById('baAfterFile').click()">
+            <input type="file" id="baAfterFile" accept="image/*" style="display:none" />
+            <img id="baAfterPreview" class="img-preview-upload" src="" alt="after preview" />
+            <div class="upload-placeholder" id="baAfterPlaceholder"><span>📁</span><p>เลือกรูปหลัง</p></div>
+          </div>
+          <input type="hidden" id="baAfter2" />
+        </label>
+        <div class="modal-btns">
+          <button class="btn btn--cancel" onclick="closeModal('baModal')">ยกเลิก</button>
+          <button class="btn btn--primary" onclick="saveBA()">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>
+<!-- This file needs the admin button, modals, and admin.js injected -->
