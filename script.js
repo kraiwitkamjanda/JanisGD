@@ -131,23 +131,74 @@ if (baSlider) {
 const contactForm = document.getElementById('contactForm');
 const formNote    = document.getElementById('formNote');
 
+/* ----- LINE Notify config ----- */
+// วิธีรับ Token: ไปที่ https://notify-bot.line.me/th/ → Log in → สร้าง Token
+// แล้วนำ Token มาใส่ตรงนี้
+const LINE_NOTIFY_TOKEN = 'YOUR_LINE_NOTIFY_TOKEN';
+
+async function sendLineNotify(message) {
+  // LINE Notify ต้อง call จาก server-side เพื่อซ่อน Token
+  // วิธีที่ 1 (แนะนำ): ใช้ Make.com / n8n webhook รับข้อมูลแล้วส่ง LINE
+  // วิธีที่ 2: ใช้ CORS proxy (สำหรับทดสอบเท่านั้น)
+  const WEBHOOK_URL = 'https://hook.us2.make.com/diefkrxci85o0hmlg7e96i7v8a5n8hfe'; // ← ใส่ Webhook URL ตรงนี้
+
+  if (WEBHOOK_URL === 'https://hook.us2.make.com/diefkrxci85o0hmlg7e96i7v8a5n8hfe') {
+    // Dev mode: แสดง console log
+    console.log('LINE Notify payload:', message);
+    return true;
+  }
+
+  const res = await fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message }),
+  });
+  return res.ok;
+}
+
 if (contactForm) {
-  contactForm.addEventListener('submit', e => {
+  contactForm.addEventListener('submit', async e => {
     e.preventDefault();
 
-    const btn = contactForm.querySelector('button[type="submit"]');
+    const btn      = contactForm.querySelector('button[type="submit"]');
     const original = btn.textContent;
-    btn.textContent = 'กำลังส่ง...';
-    btn.disabled = true;
+    btn.textContent = '⏳ กำลังส่ง...';
+    btn.disabled    = true;
+    formNote.textContent = '';
 
-    // Simulate async submit (replace with real API call)
-    setTimeout(() => {
-      formNote.textContent = '✅ ส่งข้อความสำเร็จ! เราจะติดต่อกลับภายใน 24 ชั่วโมง';
-      formNote.style.color = '#2d6a1f';
-      contactForm.reset();
-      btn.textContent = original;
-      btn.disabled = false;
-    }, 1200);
+    const name    = document.getElementById('name').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value.trim();
+
+    const lineMsg = [
+      '🌿 มีลูกค้าใหม่จากเว็บไซต์!',
+      '──────────────────',
+      `👤 ชื่อ: ${name}`,
+      `📞 เบอร์: ${phone}`,
+      `🛠 บริการ: ${service || 'ไม่ระบุ'}`,
+      `💬 รายละเอียด: ${message || '-'}`,
+      '──────────────────',
+      `🕐 เวลา: ${new Date().toLocaleString('th-TH')}`,
+    ].join('
+');
+
+    try {
+      const ok = await sendLineNotify(lineMsg);
+      if (ok) {
+        formNote.textContent = '✅ ส่งข้อความสำเร็จ! เราจะโทรกลับภายใน 24 ชั่วโมง';
+        formNote.style.color = '#2d6a1f';
+        contactForm.reset();
+      } else {
+        throw new Error('webhook error');
+      }
+    } catch (err) {
+      formNote.textContent = '❌ เกิดข้อผิดพลาด กรุณาโทรหาเราโดยตรงที่ 081-234-5678';
+      formNote.style.color = '#c0392b';
+    }
+
+    btn.textContent = original;
+    btn.disabled    = false;
   });
 }
 
