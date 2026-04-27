@@ -12,7 +12,7 @@ const EMAILJS_SERVICE_ID  = 'service_t7308o9';
 const EMAILJS_TEMPLATE_ID = 'template_m2r5yug';
 
 // ⬇️ LINE — ต้องแก้ 3 ค่านี้เอง
-const LINE_TOKEN     = '+iG5LQP6ivXaOeqCktMftSeCPZDRv4gTjhzv3JPRIiqWyjrBBNOFlu/pHIgLfgb8MAtz/V6sW6KHLZpGNqtG+5Xd5Toq+/ONH7IviNIxdaOUTMnDjt1TaXFH/bsPe/xQTUGkg1TYt+LpFxp509HeTgdB04t89/1O/w1cDnyilFU=';   // จาก developers.line.biz
+const LINE_TOKEN     = 'CcqskhTBxAOmR6hSs+z6D0310sjUSabndRD+yGwSVfy+iABV2840S9DaDW08GTRmMAtz/V6sW6KHLZpGNqtG+5Xd5Toq+/ONH7IviNIxdaMYloYSHrCrPF1j2LOh1l1olgd8U9dHXK+J9JSx19apDQdB04t89/1O/w1cDnyilFU=';   // จาก developers.line.biz
 const LINE_USER_ID   = 'Ufb16cc5b103a3aa948e883d810e6457d';                     // ขึ้นต้นด้วย U...
 const LINE_PROXY_URL = 'https://janis-gd.kraiwitkamjanda.workers.dev';       // https://line-proxy.xxx.workers.dev
 
