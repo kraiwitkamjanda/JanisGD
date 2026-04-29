@@ -6,15 +6,13 @@
    CONFIG — แก้ไขค่าตรงนี้เท่านั้น
    ================================================================ */
 
-// ✅ EmailJS (มีแล้ว ไม่ต้องแก้)
+// ✅ EmailJS
 const EMAILJS_PUBLIC_KEY  = 'nwP8iILI3k_JKlzXO';
 const EMAILJS_SERVICE_ID  = 'service_t7308o9';
 const EMAILJS_TEMPLATE_ID = 'template_m2r5yug';
 
-// ⬇️ LINE — ต้องแก้ 3 ค่านี้เอง
-const LINE_TOKEN     = '';   // จาก developers.line.biz
-const LINE_USER_ID   = '';                     // ขึ้นต้นด้วย U...
-const LINE_PROXY_URL = 'https://script.google.com/macros/s/AKfycbyBR8Va8V8Vo3cuZAsawR6DDDIowGDHyEAk9g6Tv_O1gxsp7KSDAZxBi7LQd5vbT5BCsA/exec';       // https://line-proxy.xxx.workers.dev
+// ✅ GAS URL — ไม่ต้องแก้อะไรเพิ่ม
+const LINE_PROXY_URL = 'https://script.google.com/macros/s/AKfycbyBR8Va8V8Vo3cuZAsawR6DDDIowGDHyEAk9g6Tv_O1gxsp7KSDAZxBi7LQd5vbT5BCsA/exec';
 
 /* ================================================================
    EMAILJS — โหลด SDK
@@ -22,11 +20,7 @@ const LINE_PROXY_URL = 'https://script.google.com/macros/s/AKfycbyBR8Va8V8Vo3cuZ
 (function loadEmailJS() {
   const s = document.createElement('script');
   s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-  s.onload = () => {
-    if (EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
-      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-    }
-  };
+  s.onload = () => emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
   document.head.appendChild(s);
 })();
 
@@ -41,30 +35,28 @@ async function sendEmail(params) {
 }
 
 /* ================================================================
-   LINE Messaging API — ผ่าน Cloudflare Worker
+   ส่งข้อมูลไปหา Google Apps Script → GAS ส่ง LINE ต่อเอง
    ================================================================ */
-async function sendLineNotify(lineMsg, formFields) {
-  if (!LINE_PROXY_URL || LINE_PROXY_URL.includes('ใส่') || LINE_PROXY_URL === '') {
-    console.log('[LINE] dev mode:', lineMsg);
-    return { ok: true, dev: true };
-  }
+async function sendToGAS(fields) {
   try {
-    // ส่งเป็น FormData แยก field ให้ GAS รับได้ถูกต้อง
-    const formData = new URLSearchParams();
-    formData.append('name',    formFields.name);
-    formData.append('phone',   formFields.phone);
-    formData.append('service', formFields.service);
-    formData.append('message', formFields.message);
+    // ใช้ URLSearchParams เพื่อให้ GAS รับได้ผ่าน e.parameter
+    const body = new URLSearchParams();
+    body.append('name',    fields.name);
+    body.append('phone',   fields.phone);
+    body.append('service', fields.service);
+    body.append('message', fields.message);
 
+    // no-cors เพราะ GAS ไม่ support CORS — ส่งได้แต่อ่าน response ไม่ได้
     await fetch(LINE_PROXY_URL, {
       method: 'POST',
-      body: formData,
-      mode: 'no-cors',
+      mode:   'no-cors',
+      body:   body,
     });
 
+    // no-cors ถือว่า ok ถ้าไม่ throw error
     return { ok: true };
   } catch (e) {
-    console.error('[LINE]', e);
+    console.error('[GAS]', e);
     return { ok: false };
   }
 }
@@ -83,9 +75,7 @@ window.addEventListener('scroll', () => {
 const burgerBtn  = document.getElementById('burgerBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
-burgerBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-});
+burgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => mobileMenu.classList.remove('open'));
 });
@@ -182,8 +172,7 @@ if (baSlider) {
   let isDragging = false;
   function setSliderPosition(clientX) {
     const rect = baSlider.getBoundingClientRect();
-    let pct = (clientX - rect.left) / rect.width;
-    pct = Math.min(Math.max(pct, 0.04), 0.96);
+    let pct = Math.min(Math.max((clientX - rect.left) / rect.width, 0.04), 0.96);
     baBefore.style.width = (pct * 100) + '%';
     baHandle.style.left  = (pct * 100) + '%';
   }
@@ -211,51 +200,38 @@ if (contactForm) {
     btn.disabled    = true;
     formNote.textContent = '';
 
-    const name    = document.getElementById('name').value.trim();
-    const phone   = document.getElementById('phone').value.trim();
-    const service = document.getElementById('service').value || 'ไม่ระบุ';
-    const message = document.getElementById('message').value.trim() || '-';
-    const now     = new Date().toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' });
+    // เก็บค่าจากฟอร์ม
+    const fields = {
+      name:    document.getElementById('name').value.trim()    || 'ไม่ระบุ',
+      phone:   document.getElementById('phone').value.trim()   || 'ไม่ระบุ',
+      service: document.getElementById('service').value        || 'ไม่ระบุ',
+      message: document.getElementById('message').value.trim() || '-',
+    };
+    const now = new Date().toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' });
 
-    // ข้อความสำหรับ LINE
-    const lineMsg = [
-      '🌿 มีลูกค้าใหม่จากเว็บไซต์!',
-      '──────────────────',
-      `👤 ชื่อ: ${name}`,
-      `📞 เบอร์: ${phone}`,
-      `🛠 บริการ: ${service}`,
-      `💬 รายละเอียด: ${message}`,
-      '──────────────────',
-      `🕐 เวลา: ${now}`,
-    ].join('\n');
-
-    // params สำหรับ EmailJS
+    // EmailJS params
     const emailParams = {
-      from_name: name,
-      phone,
-      service,
-      message,
-      sent_at: now,
+      from_name: fields.name,
+      phone:     fields.phone,
+      service:   fields.service,
+      message:   fields.message,
+      sent_at:   now,
     };
 
     // ส่งพร้อมกันทั้ง 2 ช่องทาง
-    const [emailResult, lineResult] = await Promise.allSettled([
+    const [emailResult, gasResult] = await Promise.allSettled([
       sendEmail(emailParams),
-      sendLineNotify(lineMsg, { name, phone, service, message }),
+      sendToGAS(fields),
     ]);
 
-    const emailOk  = emailResult.status === 'fulfilled' && emailResult.value?.ok;
-    const lineOk   = lineResult.status  === 'fulfilled' && lineResult.value?.ok;
-    const lineDev  = lineResult.value?.dev;
+    const emailOk = emailResult.status === 'fulfilled' && emailResult.value?.ok;
+    const gasOk   = gasResult.status   === 'fulfilled' && gasResult.value?.ok;
 
-    if (emailOk || lineOk) {
-      let channels = [];
-      if (emailOk)            channels.push('📧 อีเมล');
-      if (lineOk && !lineDev) channels.push('💬 LINE');
-
-      formNote.textContent = channels.length
-        ? `✅ ส่งสำเร็จผ่าน ${channels.join(' และ ')} — เราจะติดต่อกลับภายใน 24 ชั่วโมง`
-        : '✅ ส่งสำเร็จ! เราจะติดต่อกลับภายใน 24 ชั่วโมง';
+    if (emailOk || gasOk) {
+      let ch = [];
+      if (emailOk) ch.push('📧 อีเมล');
+      if (gasOk)   ch.push('💬 LINE');
+      formNote.textContent = `✅ ส่งสำเร็จผ่าน ${ch.join(' และ ')} — เราจะติดต่อกลับภายใน 24 ชั่วโมง`;
       formNote.style.color = '#2d6a1f';
       contactForm.reset();
     } else {
@@ -263,8 +239,8 @@ if (contactForm) {
       formNote.style.color = '#c0392b';
     }
 
-    if (emailOk && !lineOk && !lineDev) formNote.textContent += ' (LINE ขัดข้อง แต่อีเมลส่งแล้ว)';
-    if (!emailOk && lineOk)             formNote.textContent += ' (อีเมลขัดข้อง แต่ LINE ส่งแล้ว)';
+    if (emailOk && !gasOk) formNote.textContent += ' (LINE ขัดข้อง แต่อีเมลส่งแล้ว)';
+    if (!emailOk && gasOk) formNote.textContent += ' (อีเมลขัดข้อง แต่ LINE ส่งแล้ว)';
 
     btn.textContent = original;
     btn.disabled    = false;
