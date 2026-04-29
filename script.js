@@ -39,21 +39,13 @@ async function sendEmail(params) {
    ================================================================ */
 async function sendToGAS(fields) {
   try {
-    // ใช้ URLSearchParams เพื่อให้ GAS รับได้ผ่าน e.parameter
-    const body = new URLSearchParams();
-    body.append('name',    fields.name);
-    body.append('phone',   fields.phone);
-    body.append('service', fields.service);
-    body.append('message', fields.message);
-
-    // no-cors เพราะ GAS ไม่ support CORS — ส่งได้แต่อ่าน response ไม่ได้
-    await fetch(LINE_PROXY_URL, {
-      method: 'POST',
-      mode:   'no-cors',
-      body:   body,
+    // ส่งเป็น JSON + ใช้ text/plain เพื่อหลีกเลี่ยง CORS preflight
+    // GAS จะรับได้ผ่าน JSON.parse(e.postData.contents)
+    const res = await fetch(LINE_PROXY_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body:    JSON.stringify(fields),
     });
-
-    // no-cors ถือว่า ok ถ้าไม่ throw error
     return { ok: true };
   } catch (e) {
     console.error('[GAS]', e);
