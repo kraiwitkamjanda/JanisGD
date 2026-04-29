@@ -12,9 +12,9 @@ const EMAILJS_SERVICE_ID  = 'service_t7308o9';
 const EMAILJS_TEMPLATE_ID = 'template_m2r5yug';
 
 // ⬇️ LINE — ต้องแก้ 3 ค่านี้เอง
-const LINE_TOKEN     = 'CcqskhTBxAOmR6hSs+z6D0310sjUSabndRD+yGwSVfy+iABV2840S9DaDW08GTRmMAtz/V6sW6KHLZpGNqtG+5Xd5Toq+/ONH7IviNIxdaMYloYSHrCrPF1j2LOh1l1olgd8U9dHXK+J9JSx19apDQdB04t89/1O/w1cDnyilFU=';   // จาก developers.line.biz
-const LINE_USER_ID   = 'Ufb16cc5b103a3aa948e883d810e6457d';                     // ขึ้นต้นด้วย U...
-const LINE_PROXY_URL = 'https://janis-gd.kraiwitkamjanda.workers.dev';       // https://line-proxy.xxx.workers.dev
+const LINE_TOKEN     = '';   // จาก developers.line.biz
+const LINE_USER_ID   = '';                     // ขึ้นต้นด้วย U...
+const LINE_PROXY_URL = 'https://script.google.com/macros/s/AKfycbyBR8Va8V8Vo3cuZAsawR6DDDIowGDHyEAk9g6Tv_O1gxsp7KSDAZxBi7LQd5vbT5BCsA/exec';       // https://line-proxy.xxx.workers.dev
 
 /* ================================================================
    EMAILJS — โหลด SDK
@@ -43,24 +43,26 @@ async function sendEmail(params) {
 /* ================================================================
    LINE Messaging API — ผ่าน Cloudflare Worker
    ================================================================ */
-async function sendLineNotify(lineMsg) {
-  // ยังไม่ได้ตั้งค่า → dev mode
-  if (!LINE_PROXY_URL || LINE_PROXY_URL.includes('ใส่')) {
+async function sendLineNotify(lineMsg, formFields) {
+  if (!LINE_PROXY_URL || LINE_PROXY_URL.includes('ใส่') || LINE_PROXY_URL === '') {
     console.log('[LINE] dev mode:', lineMsg);
     return { ok: true, dev: true };
   }
   try {
-    const res  = await fetch(LINE_PROXY_URL, {
+    // ส่งเป็น FormData แยก field ให้ GAS รับได้ถูกต้อง
+    const formData = new URLSearchParams();
+    formData.append('name',    formFields.name);
+    formData.append('phone',   formFields.phone);
+    formData.append('service', formFields.service);
+    formData.append('message', formFields.message);
+
+    await fetch(LINE_PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        token:   LINE_TOKEN,
-        userId:  LINE_USER_ID,
-        message: lineMsg,
-      }),
+      body: formData,
+      mode: 'no-cors',
     });
-    const data = await res.json();
-    return { ok: data.ok };
+
+    return { ok: true };
   } catch (e) {
     console.error('[LINE]', e);
     return { ok: false };
@@ -239,7 +241,7 @@ if (contactForm) {
     // ส่งพร้อมกันทั้ง 2 ช่องทาง
     const [emailResult, lineResult] = await Promise.allSettled([
       sendEmail(emailParams),
-      sendLineNotify(lineMsg),
+      sendLineNotify(lineMsg, { name, phone, service, message }),
     ]);
 
     const emailOk  = emailResult.status === 'fulfilled' && emailResult.value?.ok;
